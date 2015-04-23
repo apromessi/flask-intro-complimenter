@@ -15,6 +15,15 @@ def start_here():
 # route to display a simple web page
 @app.route('/hello')
 def say_hello():
+    input_string = ""
+
+    for i in complimenter():
+        an_input ='<input type="radio" name="compliment" value="%s">%s</input>' %(i, i)
+        input_string += an_input
+
+    return input_string
+
+
     return """
     <!DOCTYPE html>
     <html>
@@ -25,6 +34,10 @@ def say_hello():
             <h1>Hi There!</h1>
             <form action="/greet">
                 <label>What's your name? <input type="text" name="person"></label>
+                <label>
+                    What compliment do you like? 
+                    <input type="radio" name="compliment" value="">
+                </label>
                 <input type="submit">
             </form>
         </body>
@@ -36,11 +49,11 @@ def say_hello():
 def greet_person():
     player = request.args.get("person")
 
-    AWESOMENESS = [
-        'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
-        'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
+    # AWESOMENESS = [
+    #     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
+    #     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
-    compliment = choice(AWESOMENESS)
+    compliment = choice(complimenter())
 
     return """
     <!DOCTYPE html>
@@ -52,6 +65,12 @@ def greet_person():
             Hi %s I think you're %s!
         </body>
     </html>""" % (player, compliment)
+
+def complimenter():
+    AWESOMENESS = [
+        'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
+        'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
+    return AWESOMENESS
 
 
 if __name__ == '__main__':
