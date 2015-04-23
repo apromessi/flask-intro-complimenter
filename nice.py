@@ -45,12 +45,13 @@ def say_hello():
 @app.route('/greet')
 def greet_person():
     player = request.args.get("person")
+    compliment = request.args.get("compliment")
 
     # AWESOMENESS = [
     #     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
     #     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
-    compliment = choice(complimenter())
+    # compliment = choice(complimenter())
 
     return """
     <!DOCTYPE html>
