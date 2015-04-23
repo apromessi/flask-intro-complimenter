@@ -18,11 +18,8 @@ def say_hello():
     input_string = ""
 
     for i in complimenter():
-        an_input ='<input type="radio" name="compliment" value="%s">%s</input>' %(i, i)
+        an_input ='<input type="radio" name="compliment" value="%s">%s</input><br>' %(i, i)
         input_string += an_input
-
-    return input_string
-
 
     return """
     <!DOCTYPE html>
@@ -33,17 +30,17 @@ def say_hello():
         <body>
             <h1>Hi There!</h1>
             <form action="/greet">
-                <label>What's your name? <input type="text" name="person"></label>
+                <label>What's your name? <input type="text" name="person"></label><br>
                 <label>
-                    What compliment do you like? 
-                    <input type="radio" name="compliment" value="">
-                </label>
+                    What compliment do you like?<br>
+                    %s
+                </label><br>
                 <input type="submit">
             </form>
         </body>
     </html>
 
-    """
+    """ % (input_string)
 
 @app.route('/greet')
 def greet_person():
